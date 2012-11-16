@@ -1,2 +1,1 @@
-Monad.start
 ExUnit.start
