@@ -32,7 +32,7 @@ defmodule ErrorMonadTest do
 
   test "error multi-step bind" do
     assert (monad ErrorM do
-      a_value <- ErrorMonadTest.error_start()
+      _a_value <- ErrorMonadTest.error_start()
       b_value <- ErrorMonadTest.error_good()
       return b_value
     end) == {:ok, :another_value}
@@ -47,9 +47,15 @@ defmodule ErrorMonadTest do
   test "error monad fail" do
     assert (monad ErrorM do
       a_value <- ErrorMonadTest.error_start()
-      b_value <- ErrorMonadTest.error_bad()
+      _b_value <- ErrorMonadTest.error_bad()
       return a_value
     end) == {:error, :some_failure}
   end
 
+end
+
+defmodule ListMonadTest do
+  require ExUnit.DocTest
+  use ExUnit.Case, async: true
+  doctest ListM
 end
