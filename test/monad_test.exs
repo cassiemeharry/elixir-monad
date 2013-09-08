@@ -5,7 +5,10 @@ import Monad
 require ErrorM
 
 defmodule ErrorMonadTest do
+  require ExUnit.DocTest
   use ExUnit.Case
+
+  doctest ErrorM
 
   # Error Monad
   def error_start() do
