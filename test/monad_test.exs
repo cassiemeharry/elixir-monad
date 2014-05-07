@@ -20,6 +20,9 @@ defmodule ErrorMonadTest do
   def error_bad() do
     {:error, :some_failure}
   end
+  def error_worse() do
+    {:error, :some_failure, :more_description}
+  end
 
   test "error monad basics" do
     assert (monad ErrorM do
@@ -53,6 +56,14 @@ defmodule ErrorMonadTest do
       _b_value <- ErrorMonadTest.error_bad()
       return a_value
     end) == {:error, :some_failure}
+  end
+
+  test "error monad fail for larger error tuple" do
+    assert (monad ErrorM do
+      a_value <- ErrorMonadTest.error_start()
+      _b_value <- ErrorMonadTest.error_worse()
+      return a_value
+    end) == {:error, :some_failure, :more_description}
   end
 
 end
