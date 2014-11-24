@@ -26,7 +26,7 @@ functional languages, you can abstract out that tree like this:
     import Monad
     import ErrorM
 
-    some_pid <- (monad ErrorM do
+    some_pid = (monad ErrorM do
         value <- Library.might_fail()
         Library.also_might_fail(value)
     end)
